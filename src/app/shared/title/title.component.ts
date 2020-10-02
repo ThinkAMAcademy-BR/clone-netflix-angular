@@ -1,0 +1,38 @@
+import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+
+@Component({
+  selector: 'app-title',
+  templateUrl: './title.component.html',
+  styleUrls: ['./title.component.scss']
+})
+export class TitleComponent implements OnInit, AfterViewInit {
+  @Input() title = undefined;
+  @ViewChild('trailer', { static: false }) trailer: ElementRef<HTMLVideoElement>;
+
+  constructor() { }
+
+  ngOnInit(): void {
+
+  }
+
+  ngAfterViewInit(): void {
+
+  }
+
+  playVideo(video: string): void {
+    this.trailer.nativeElement.play();
+  }
+
+  stopVideo(): void {
+    this.trailer.nativeElement.currentTime = 0;
+    this.trailer.nativeElement.pause();
+  }
+
+  getMuted(): boolean {
+    return this.trailer?.nativeElement?.muted || false;
+  }
+
+  toggleSound(): void {
+    this.trailer.nativeElement.muted = !this.trailer.nativeElement.muted;
+  }
+}
